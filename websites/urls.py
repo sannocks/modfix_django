@@ -1,11 +1,7 @@
-from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
-from .views import page_list, create_page, website_setup
+from django.urls import path
+from .views import website_list, page_list
 
 urlpatterns = [
-    path('pages/', page_list, name='page_list'),
-    path('pages/new/', create_page, name='create_page'),
-    path('website/setup/', website_setup, name='website_setup'), 
+    path('', website_list, name='website_list'),
+    path('<int:website_id>/pages/', page_list, name='page_list'),
 ]

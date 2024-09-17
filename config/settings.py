@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'billing',
     'dashboard',
     'staff',
-    'index'
+    'index',
+    'tasks',
 ]
 
 SITE_ID = 1
@@ -63,6 +64,18 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',  # Django Allauth backend
 ]
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else: 
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.sendgrid.net'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = 'apikey'  # This is literal, don't replace with your API key
+    EMAIL_HOST_PASSWORD = 'your_sendgrid_api_key'  # Add your API key here
+    DEFAULT_FROM_EMAIL = 'your_email@example.com'
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

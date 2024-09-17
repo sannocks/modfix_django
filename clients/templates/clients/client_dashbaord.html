@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Welcome, {{ profile.user.username }}</h1>
+
+<p>Your plan: {{ profile.plan.name }}</p>
+<p>Available hours: {{ profile.available_hours }} hours</p>
+{% endblock %}

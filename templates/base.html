@@ -18,17 +18,31 @@
             <!-- Conditional Auth Links -->
             {% if user.is_authenticated %}
                 <li><a href="{% url 'account_email' %}">My Account</a></li>
-                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                <li><a href="{% url 'account_logout' %}">Logout</a></li>
                 {% if user.is_staff %}
-                    <li><a href="{% url 'staff_dashboard' %}">Staff Dashbaord</a></li>
+                    <li><a href="{% url 'staff_dashboard' %}">Staff Dashboard</a></li>
+                    <li><a href="{% url 'task_list' %}">My Tasks</a></li>
+                {% else %}
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'website_list' %}">My Websites</a></li>
                 {% endif %}
+                <li><a href="{% url 'account_logout' %}">Logout</a></li>
             {% else %}
                 <li><a href="{% url 'account_login' %}">Login</a></li>
                 <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
             {% endif %}
         </ul>
     </nav>
+
+    <!-- Notification Messages -->
+    {% if messages %}
+        <div class="notifications">
+            <ul>
+                {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 
     <!-- Main Content Block -->
     <div class="container">

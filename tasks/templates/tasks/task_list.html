@@ -1,0 +1,22 @@
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+<h1>Your Tasks</h1>
+
+<ul>
+    {% for task in tasks %}
+    <li>
+        <a href="{% url 'update_task_status' task.id %}">
+            Task for {{ task.client.user.username }}: {{ task.content_block.block_type }} ({{ task.status }})
+        </a>
+        <p>Urgency: {{ task.urgency }}</p>
+    </li>
+    {% endfor %}
+</ul>
