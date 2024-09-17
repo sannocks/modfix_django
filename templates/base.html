@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website Agency{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <!-- Add any other meta tags, scripts, or stylesheets -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'pricing' %}">Pricing</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <!-- Conditional Auth Links -->
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'account_email' %}">My Account</a></li>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                {% if user.is_staff %}
+                    <li><a href="{% url 'staff_dashboard' %}">Staff Dashbaord</a></li>
+                {% endif %}
+            {% else %}
+                <li><a href="{% url 'account_login' %}">Login</a></li>
+                <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- Main Content Block -->
+    <div class="container">
+        {% block content %}
+        <!-- Page-specific content will go here -->
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 My Website Agency. All rights reserved.</p>
+    </footer>
+
+    <!-- Include additional JavaScript if needed -->
+</body>
+</html>

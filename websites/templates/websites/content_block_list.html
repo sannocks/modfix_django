@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Content Blocks for {{ page.title }}</h1>
+<ul>
+    {% for block in content_blocks %}
+        <li><a href="{% url 'staff:content_block_edit' block.id %}">{{ block.get_block_type_display }} - {{ block.title }}</a></li>
+    {% endfor %}
+</ul>
+<a href="{% url 'staff:create_content_block' page.id %}">Add New Content Block</a>
+{% endblock %}

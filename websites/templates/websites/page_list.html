@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Pages for {{ website.name }}</h1>
+<ul>
+    {% for page in pages %}
+        <li><a href="{% url 'staff:page_detail' page.id %}">{{ page.title }}</a></li>
+    {% endfor %}
+</ul>
+<a href="{% url 'staff:create_page' website.id %}">Create New Page</a>
+{% endblock %}

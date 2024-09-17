@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Websites</h1>
+<ul>
+    {% for website in websites %}
+        <li><a href="{% url 'staff:website_detail' website.id %}">{{ website.name }}</a></li>
+    {% endfor %}
+</ul>
+<a href="{% url 'staff:create_website' %}">Create New Website</a>
+{% endblock %}
